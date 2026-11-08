@@ -48,6 +48,14 @@ nav.steps button {
   border: 2px solid var(--line); background: var(--card); color: var(--ink);
   cursor: pointer; position: relative;
 }
+nav.steps button[data-tip]::after {
+  content: attr(data-tip); position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+  white-space: nowrap; pointer-events: none; z-index: 5;
+  font: 700 var(--s1)/1 var(--body); color: var(--night); background: var(--moon);
+  padding: 7px 10px; border-radius: 8px; opacity: 0; transition: opacity 0.12s;
+}
+nav.steps button[data-tip]:hover::after, nav.steps button[data-tip]:focus-visible::after { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { nav.steps button[data-tip]::after { transition: none; } }
 nav.steps button.bonus { border-style: dashed; border-color: var(--pumpkin); }
 nav.steps button[aria-current="step"] { background: var(--moon); border-color: var(--moon); color: var(--night); }
 nav.steps button:focus-visible, .pager button:focus-visible, summary:focus-visible { outline: 3px solid var(--moon); outline-offset: 3px; }
@@ -149,19 +157,19 @@ q { quotes: "„" "”"; font-weight: 700; }
   </header>
 
   <nav class="steps" aria-label="Feladatok">
-    <button type="button" data-go="s4" class="start-btn" aria-label="Indulás a 4. feladathoz">Indulás</button>
-    <button type="button" data-go="4" aria-label="4. feladat">4</button>
-    <button type="button" data-go="5" aria-label="5. feladat">5</button>
-    <button type="button" data-go="s6" class="start-btn" aria-label="Indulás a 6. feladathoz">Indulás</button>
-    <button type="button" data-go="6" aria-label="6. feladat">6</button>
-    <button type="button" data-go="7" aria-label="7. feladat">7</button>
-    <button type="button" data-go="8" aria-label="8. feladat">8</button>
-    <button type="button" data-go="9" aria-label="9. feladat">9</button>
-    <button type="button" data-go="10" aria-label="10. feladat">10</button>
-    <button type="button" data-go="11" aria-label="11. feladat">11</button>
-    <button type="button" data-go="12" class="bonus" aria-label="12. szorgalmi">12</button>
-    <button type="button" data-go="13" class="bonus" aria-label="13. szorgalmi">13</button>
-    <button type="button" data-go="14" class="bonus" aria-label="14. szorgalmi">14</button>
+    <button type="button" data-go="s4" class="start-btn" aria-label="Indulás a 4. feladathoz: Indulás: ha nem voltál" data-tip="Indulás: ha nem voltál">Indulás</button>
+    <button type="button" data-go="4" aria-label="4. feladat: Cukorka újraindul" data-tip="Cukorka újraindul">4</button>
+    <button type="button" data-go="5" aria-label="5. feladat: Pók elkap" data-tip="Pók elkap">5</button>
+    <button type="button" data-go="s6" class="start-btn" aria-label="Indulás a 6. feladathoz: Indulás: ha itt voltál" data-tip="Indulás: ha itt voltál">Indulás</button>
+    <button type="button" data-go="6" aria-label="6. feladat: Szellem teleport" data-tip="Szellem teleport">6</button>
+    <button type="button" data-go="7" aria-label="7. feladat: Pók teleport" data-tip="Pók teleport">7</button>
+    <button type="button" data-go="8" aria-label="8. feladat: Cukor-számláló" data-tip="Cukor-számláló">8</button>
+    <button type="button" data-go="9" aria-label="9. feladat: Csípés-számláló" data-tip="Csípés-számláló">9</button>
+    <button type="button" data-go="10" aria-label="10. feladat: Szellem nyer" data-tip="Szellem nyer">10</button>
+    <button type="button" data-go="11" aria-label="11. feladat: Szellem meghal" data-tip="Szellem meghal">11</button>
+    <button type="button" data-go="12" class="bonus" aria-label="12. szorgalmi: Óriás szellem" data-tip="Óriás szellem">12</button>
+    <button type="button" data-go="13" class="bonus" aria-label="13. szorgalmi: Véletlen sír" data-tip="Véletlen sír">13</button>
+    <button type="button" data-go="14" class="bonus" aria-label="14. szorgalmi: Véletlen tök" data-tip="Véletlen tök">14</button>
   </nav>
 
   <main>
@@ -179,7 +187,6 @@ q { quotes: "„" "”"; font-weight: 700; }
       <div class="task-head"><span class="num">4.</span><h2>Hová lett a cukor?</h2></div>
       <div class="who"><span class="chip"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="70" height="40" viewBox="0 0 70 40"><polygon points="24,20 5,7 8,20 5,33" fill="#9B4DFF" stroke="#6A2FB8" stroke-width="2" stroke-linejoin="round"/><polygon points="46,20 65,7 62,20 65,33" fill="#9B4DFF" stroke="#6A2FB8" stroke-width="2" stroke-linejoin="round"/><circle cx="35" cy="20" r="13" fill="#FF8C1A" stroke="#C25E00" stroke-width="2"/><path d="M29 9 Q36 20 29 31" fill="none" stroke="#FFF3D6" stroke-width="3" stroke-linecap="round"/><path d="M38 8 Q45 20 38 32" fill="none" stroke="#FFF3D6" stroke-width="3" stroke-linecap="round"/></svg>Cukorka</span></div>
       <p class="goal">Ha a cukorka hozzáér a szellemhez, tűnjön el egy kicsit, majd jelenjen meg egy véletlen helyen!</p>
-      <p class="try"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18" stroke="#4CBF56" stroke-width="2.4" stroke-linecap="round"/><path d="M6 4c4-2 7 2 13 0v9c-6 2-9-2-13 0z" fill="#4CBF56" stroke="#45993D" stroke-width="1.2" stroke-linejoin="round"/></svg>Kapd el a cukorkát!</p>
       <details class="help">
         <summary>Segítség</summary>
         <div class="help-body">
@@ -213,7 +220,6 @@ q { quotes: "„" "”"; font-weight: 700; }
         <li>A pók a <b>távolabbi tökből</b> induljon!</li>
         <li>Legyen kisebb: a mérete kb. <b>30</b> legyen.</li>
       </ul>
-      <p class="try"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18" stroke="#4CBF56" stroke-width="2.4" stroke-linecap="round"/><path d="M6 4c4-2 7 2 13 0v9c-6 2-9-2-13 0z" fill="#4CBF56" stroke="#45993D" stroke-width="1.2" stroke-linejoin="round"/></svg>Menekülj a pók elől!</p>
       <details class="help">
         <summary>Segítség</summary>
         <div class="help-body">
@@ -261,7 +267,6 @@ q { quotes: "„" "”"; font-weight: 700; }
       <div class="who"><span class="chip"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70"><path d="M16 42 Q4 41 5 27 Q12 31 17 35 Z" fill="#fff" stroke="#B9B3D9" stroke-width="2.5" stroke-linejoin="round"/><path d="M54 42 Q66 41 65 27 Q58 31 53 35 Z" fill="#fff" stroke="#B9B3D9" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 34 A21 21 0 0 1 56 34 V58 Q51 65 46 58 Q40.5 65 35 58 Q29.5 65 24 58 Q19 65 14 58 Z" fill="#fff" stroke="#B9B3D9" stroke-width="3" stroke-linejoin="round"/><circle cx="28" cy="28" r="8.5" fill="#fff" stroke="#222" stroke-width="1.8"/><circle cx="31" cy="25" r="4.2" fill="#222"/><circle cx="44" cy="27" r="6" fill="#fff" stroke="#222" stroke-width="1.8"/><circle cx="42" cy="29.5" r="2.8" fill="#222"/><path d="M38.5 17.5 Q44 13 49.5 17" fill="none" stroke="#222" stroke-width="2" stroke-linecap="round"/><path d="M26 40 Q36 54 47 40 Z" fill="#3A1F3A" stroke="#3A1F3A" stroke-width="1.5" stroke-linejoin="round"/><path d="M35 45 Q34 56 40 55 Q45 54 43 44 Z" fill="#FF6B8A" stroke="#D94A6A" stroke-width="1.2"/><path d="M39 46.5 V51" stroke="#D94A6A" stroke-width="1.2" stroke-linecap="round"/><circle cx="20" cy="39" r="3.2" fill="#FFB3C7"/><circle cx="52" cy="37" r="2.8" fill="#FFB3C7"/></svg>Szellem</span></div>
       <p class="goal">A hold sötét foltjai titkos átjárók!</p>
       <p>Ha a szellem hozzáér az egyik folthoz, tűnjön el egy kicsit, majd jelenjen meg a jobb oldali <b>sírnál</b>.</p>
-      <p class="try"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18" stroke="#4CBF56" stroke-width="2.4" stroke-linecap="round"/><path d="M6 4c4-2 7 2 13 0v9c-6 2-9-2-13 0z" fill="#4CBF56" stroke="#45993D" stroke-width="1.2" stroke-linejoin="round"/></svg>Repülj a holdhoz!</p>
       <details class="help">
         <summary>Segítség</summary>
         <div class="help-body">
@@ -290,11 +295,10 @@ q { quotes: "„" "”"; font-weight: 700; }
     </section>
 
     <section class="task" data-n="7" hidden>
-      <div class="task-head"><span class="num">7.</span><h2>A pók is átjár</h2></div>
+      <div class="task-head"><span class="num">7.</span><h2>A pók is teleportál</h2></div>
       <div class="who"><span class="chip"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="80" height="70" viewBox="0 0 80 70"><g fill="none" stroke="#B6F23A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 33 L13.5 16 L5.1 5" /><path d="M24 37 L13.5 54 L5.1 65" /><path d="M33 33 L29.5 16 L26.7 5" /><path d="M33 37 L29.5 54 L26.7 65" /><path d="M42 33 L45.5 16 L48.3 5" /><path d="M42 37 L45.5 54 L48.3 65" /><path d="M51 33 L61.5 16 L69.9 5" /><path d="M51 37 L61.5 54 L69.9 65" /></g><ellipse cx="27" cy="35" rx="17" ry="14" fill="#1E1A2A" stroke="#B6F23A" stroke-width="2.5"/><path d="M20 35 L27 29 L34 35 L27 41 Z" fill="#FF8C1A"/><circle cx="54" cy="35" r="12" fill="#1E1A2A" stroke="#B6F23A" stroke-width="2.5"/><circle cx="57" cy="29" r="6" fill="#fff" stroke="#111" stroke-width="1.2"/><circle cx="56" cy="41" r="4.5" fill="#fff" stroke="#111" stroke-width="1.2"/><circle cx="60" cy="28" r="2.8" fill="#E8203A"/><circle cx="58" cy="42" r="2.2" fill="#E8203A"/><path d="M51 21 L62 24" stroke="#B6F23A" stroke-width="2" stroke-linecap="round"/><path d="M65 32 L71 34 L65 36 Z" fill="#fff"/><path d="M65 36.5 L70 38.5 L65 40 Z" fill="#fff"/></svg>Pók</span></div>
       <p class="goal">A pók is ismeri a titkos átjárót!</p>
       <p>Ha a pók hozzáér az egyik folthoz, ugorjon a bal oldali <b>tökhöz</b>.</p>
-      <p class="try"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18" stroke="#4CBF56" stroke-width="2.4" stroke-linecap="round"/><path d="M6 4c4-2 7 2 13 0v9c-6 2-9-2-13 0z" fill="#4CBF56" stroke="#45993D" stroke-width="1.2" stroke-linejoin="round"/></svg>Csalogasd a pókot a holdhoz!</p>
       <details class="help">
         <summary>Segítség</summary>
         <div class="help-body">
@@ -313,7 +317,6 @@ q { quotes: "„" "”"; font-weight: 700; }
         <li>Próbálgasd: kattints a <q>legyen</q> és a <q>változzon</q> blokkra! Mi történik?</li>
         <li>Most jön a feladat: a játék számolja, hány cukrot evett meg a szellem!</li>
       </ol>
-      <p class="try"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18" stroke="#4CBF56" stroke-width="2.4" stroke-linecap="round"/><path d="M6 4c4-2 7 2 13 0v9c-6 2-9-2-13 0z" fill="#4CBF56" stroke="#45993D" stroke-width="1.2" stroke-linejoin="round"/></svg>Egyél meg néhány cukrot! Jól számol?</p>
       <details class="help">
         <summary>Segítség</summary>
         <div class="help-body">
@@ -356,7 +359,6 @@ q { quotes: "„" "”"; font-weight: 700; }
         <li>Ha a pók elkapja a szellemet, nőjön a számláló.</li>
         <li>A játék most <b>ne</b> álljon le!</li>
       </ul>
-      <p class="try"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18" stroke="#4CBF56" stroke-width="2.4" stroke-linecap="round"/><path d="M6 4c4-2 7 2 13 0v9c-6 2-9-2-13 0z" fill="#4CBF56" stroke="#45993D" stroke-width="1.2" stroke-linejoin="round"/></svg>Hagyd, hogy a pók elkapjon! Jól számol?</p>
       <details class="help">
         <summary>Segítség</summary>
         <div class="help-body">
@@ -376,7 +378,6 @@ q { quotes: "„" "”"; font-weight: 700; }
       <div class="task-head"><span class="num">10.</span><h2>Nyertem!</h2></div>
       <div class="who"><span class="chip"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70"><path d="M16 42 Q4 41 5 27 Q12 31 17 35 Z" fill="#fff" stroke="#B9B3D9" stroke-width="2.5" stroke-linejoin="round"/><path d="M54 42 Q66 41 65 27 Q58 31 53 35 Z" fill="#fff" stroke="#B9B3D9" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 34 A21 21 0 0 1 56 34 V58 Q51 65 46 58 Q40.5 65 35 58 Q29.5 65 24 58 Q19 65 14 58 Z" fill="#fff" stroke="#B9B3D9" stroke-width="3" stroke-linejoin="round"/><circle cx="28" cy="28" r="8.5" fill="#fff" stroke="#222" stroke-width="1.8"/><circle cx="31" cy="25" r="4.2" fill="#222"/><circle cx="44" cy="27" r="6" fill="#fff" stroke="#222" stroke-width="1.8"/><circle cx="42" cy="29.5" r="2.8" fill="#222"/><path d="M38.5 17.5 Q44 13 49.5 17" fill="none" stroke="#222" stroke-width="2" stroke-linecap="round"/><path d="M26 40 Q36 54 47 40 Z" fill="#3A1F3A" stroke="#3A1F3A" stroke-width="1.5" stroke-linejoin="round"/><path d="M35 45 Q34 56 40 55 Q45 54 43 44 Z" fill="#FF6B8A" stroke="#D94A6A" stroke-width="1.2"/><path d="M39 46.5 V51" stroke="#D94A6A" stroke-width="1.2" stroke-linecap="round"/><circle cx="20" cy="39" r="3.2" fill="#FFB3C7"/><circle cx="52" cy="37" r="2.8" fill="#FFB3C7"/></svg>Szellem</span></div>
       <p class="goal">Ha a szellem már 3 cukrot evett, mondja: <q>Nyertem!</q>, és álljon le minden.</p>
-      <p class="try"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18" stroke="#4CBF56" stroke-width="2.4" stroke-linecap="round"/><path d="M6 4c4-2 7 2 13 0v9c-6 2-9-2-13 0z" fill="#4CBF56" stroke="#45993D" stroke-width="1.2" stroke-linejoin="round"/></svg>Egyél meg 3 cukrot!</p>
       <details class="help">
         <summary>Segítség</summary>
         <div class="help-body">
@@ -421,7 +422,6 @@ q { quotes: "„" "”"; font-weight: 700; }
       <div class="task-head"><span class="num">11.</span><h2>Meghaltam!</h2></div>
       <div class="who"><span class="chip"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70"><path d="M16 42 Q4 41 5 27 Q12 31 17 35 Z" fill="#fff" stroke="#B9B3D9" stroke-width="2.5" stroke-linejoin="round"/><path d="M54 42 Q66 41 65 27 Q58 31 53 35 Z" fill="#fff" stroke="#B9B3D9" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 34 A21 21 0 0 1 56 34 V58 Q51 65 46 58 Q40.5 65 35 58 Q29.5 65 24 58 Q19 65 14 58 Z" fill="#fff" stroke="#B9B3D9" stroke-width="3" stroke-linejoin="round"/><circle cx="28" cy="28" r="8.5" fill="#fff" stroke="#222" stroke-width="1.8"/><circle cx="31" cy="25" r="4.2" fill="#222"/><circle cx="44" cy="27" r="6" fill="#fff" stroke="#222" stroke-width="1.8"/><circle cx="42" cy="29.5" r="2.8" fill="#222"/><path d="M38.5 17.5 Q44 13 49.5 17" fill="none" stroke="#222" stroke-width="2" stroke-linecap="round"/><path d="M26 40 Q36 54 47 40 Z" fill="#3A1F3A" stroke="#3A1F3A" stroke-width="1.5" stroke-linejoin="round"/><path d="M35 45 Q34 56 40 55 Q45 54 43 44 Z" fill="#FF6B8A" stroke="#D94A6A" stroke-width="1.2"/><path d="M39 46.5 V51" stroke="#D94A6A" stroke-width="1.2" stroke-linecap="round"/><circle cx="20" cy="39" r="3.2" fill="#FFB3C7"/><circle cx="52" cy="37" r="2.8" fill="#FFB3C7"/></svg>Szellem</span></div>
       <p class="goal">Ha a pók 2-nél többször megcsípte, mondja a szellem: <q>Meghaltam!</q>, és álljon le minden.</p>
-      <p class="try"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18" stroke="#4CBF56" stroke-width="2.4" stroke-linecap="round"/><path d="M6 4c4-2 7 2 13 0v9c-6 2-9-2-13 0z" fill="#4CBF56" stroke="#45993D" stroke-width="1.2" stroke-linejoin="round"/></svg>Hagyd, hogy a pók háromszor elkapjon!</p>
       <p class="show-me">Ha kész, mutasd meg nekem (Daninak)!</p>
       <details class="help">
         <summary>Segítség</summary>
@@ -435,7 +435,6 @@ q { quotes: "„" "”"; font-weight: 700; }
       <div class="task-head"><span class="num">12.</span><h2>Óriás szellem</h2><span class="tag">szorgalmi</span></div>
       <div class="who"><span class="chip"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70"><path d="M16 42 Q4 41 5 27 Q12 31 17 35 Z" fill="#fff" stroke="#B9B3D9" stroke-width="2.5" stroke-linejoin="round"/><path d="M54 42 Q66 41 65 27 Q58 31 53 35 Z" fill="#fff" stroke="#B9B3D9" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 34 A21 21 0 0 1 56 34 V58 Q51 65 46 58 Q40.5 65 35 58 Q29.5 65 24 58 Q19 65 14 58 Z" fill="#fff" stroke="#B9B3D9" stroke-width="3" stroke-linejoin="round"/><circle cx="28" cy="28" r="8.5" fill="#fff" stroke="#222" stroke-width="1.8"/><circle cx="31" cy="25" r="4.2" fill="#222"/><circle cx="44" cy="27" r="6" fill="#fff" stroke="#222" stroke-width="1.8"/><circle cx="42" cy="29.5" r="2.8" fill="#222"/><path d="M38.5 17.5 Q44 13 49.5 17" fill="none" stroke="#222" stroke-width="2" stroke-linecap="round"/><path d="M26 40 Q36 54 47 40 Z" fill="#3A1F3A" stroke="#3A1F3A" stroke-width="1.5" stroke-linejoin="round"/><path d="M35 45 Q34 56 40 55 Q45 54 43 44 Z" fill="#FF6B8A" stroke="#D94A6A" stroke-width="1.2"/><path d="M39 46.5 V51" stroke="#D94A6A" stroke-width="1.2" stroke-linecap="round"/><circle cx="20" cy="39" r="3.2" fill="#FFB3C7"/><circle cx="52" cy="37" r="2.8" fill="#FFB3C7"/></svg>Szellem</span></div>
       <p class="goal">Ha nyert, a szellem nőjön hatalmasra, mielőtt leáll a játék!</p>
-      <p class="try"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18" stroke="#4CBF56" stroke-width="2.4" stroke-linecap="round"/><path d="M6 4c4-2 7 2 13 0v9c-6 2-9-2-13 0z" fill="#4CBF56" stroke="#45993D" stroke-width="1.2" stroke-linejoin="round"/></svg>Nyerj, aztán indítsd újra! Kicsi lett megint?</p>
       <details class="help">
         <summary>Segítség</summary>
         <div class="help-body">
@@ -455,7 +454,6 @@ q { quotes: "„" "”"; font-weight: 700; }
       <div class="task-head"><span class="num">13.</span><h2>Véletlen sír</h2><span class="tag">szorgalmi</span></div>
       <div class="who"><span class="chip"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70"><path d="M16 42 Q4 41 5 27 Q12 31 17 35 Z" fill="#fff" stroke="#B9B3D9" stroke-width="2.5" stroke-linejoin="round"/><path d="M54 42 Q66 41 65 27 Q58 31 53 35 Z" fill="#fff" stroke="#B9B3D9" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 34 A21 21 0 0 1 56 34 V58 Q51 65 46 58 Q40.5 65 35 58 Q29.5 65 24 58 Q19 65 14 58 Z" fill="#fff" stroke="#B9B3D9" stroke-width="3" stroke-linejoin="round"/><circle cx="28" cy="28" r="8.5" fill="#fff" stroke="#222" stroke-width="1.8"/><circle cx="31" cy="25" r="4.2" fill="#222"/><circle cx="44" cy="27" r="6" fill="#fff" stroke="#222" stroke-width="1.8"/><circle cx="42" cy="29.5" r="2.8" fill="#222"/><path d="M38.5 17.5 Q44 13 49.5 17" fill="none" stroke="#222" stroke-width="2" stroke-linecap="round"/><path d="M26 40 Q36 54 47 40 Z" fill="#3A1F3A" stroke="#3A1F3A" stroke-width="1.5" stroke-linejoin="round"/><path d="M35 45 Q34 56 40 55 Q45 54 43 44 Z" fill="#FF6B8A" stroke="#D94A6A" stroke-width="1.2"/><path d="M39 46.5 V51" stroke="#D94A6A" stroke-width="1.2" stroke-linecap="round"/><circle cx="20" cy="39" r="3.2" fill="#FFB3C7"/><circle cx="52" cy="37" r="2.8" fill="#FFB3C7"/></svg>Szellem</span><span class="chip new">+ új: Cél</span></div>
       <p class="goal">A holdról a szellem egy véletlen sírba ugorjon. Előtte halványuljon el, utána tűnjön elő!</p>
-      <p class="try"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18" stroke="#4CBF56" stroke-width="2.4" stroke-linecap="round"/><path d="M6 4c4-2 7 2 13 0v9c-6 2-9-2-13 0z" fill="#4CBF56" stroke="#45993D" stroke-width="1.2" stroke-linejoin="round"/></svg>Repülj a holdhoz többször! Mindig máshol jössz ki?</p>
       <details class="help">
         <summary>Segítség</summary>
         <div class="help-body">
@@ -489,7 +487,6 @@ q { quotes: "„" "”"; font-weight: 700; }
       <div class="task-head"><span class="num">14.</span><h2>Véletlen tök</h2><span class="tag">szorgalmi</span></div>
       <div class="who"><span class="chip"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="80" height="70" viewBox="0 0 80 70"><g fill="none" stroke="#B6F23A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 33 L13.5 16 L5.1 5" /><path d="M24 37 L13.5 54 L5.1 65" /><path d="M33 33 L29.5 16 L26.7 5" /><path d="M33 37 L29.5 54 L26.7 65" /><path d="M42 33 L45.5 16 L48.3 5" /><path d="M42 37 L45.5 54 L48.3 65" /><path d="M51 33 L61.5 16 L69.9 5" /><path d="M51 37 L61.5 54 L69.9 65" /></g><ellipse cx="27" cy="35" rx="17" ry="14" fill="#1E1A2A" stroke="#B6F23A" stroke-width="2.5"/><path d="M20 35 L27 29 L34 35 L27 41 Z" fill="#FF8C1A"/><circle cx="54" cy="35" r="12" fill="#1E1A2A" stroke="#B6F23A" stroke-width="2.5"/><circle cx="57" cy="29" r="6" fill="#fff" stroke="#111" stroke-width="1.2"/><circle cx="56" cy="41" r="4.5" fill="#fff" stroke="#111" stroke-width="1.2"/><circle cx="60" cy="28" r="2.8" fill="#E8203A"/><circle cx="58" cy="42" r="2.2" fill="#E8203A"/><path d="M51 21 L62 24" stroke="#B6F23A" stroke-width="2" stroke-linecap="round"/><path d="M65 32 L71 34 L65 36 Z" fill="#fff"/><path d="M65 36.5 L70 38.5 L65 40 Z" fill="#fff"/></svg>Pók</span><span class="chip new">+ új: PókCél</span></div>
       <p class="goal">A holdról a pók is véletlenszerűen ugorjon: hol az egyik, hol a másik tökhöz!</p>
-      <p class="try"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18" stroke="#4CBF56" stroke-width="2.4" stroke-linecap="round"/><path d="M6 4c4-2 7 2 13 0v9c-6 2-9-2-13 0z" fill="#4CBF56" stroke="#45993D" stroke-width="1.2" stroke-linejoin="round"/></svg>Csalogasd a pókot többször a holdhoz! Mindig máshol jön ki?</p>
       <details class="help">
         <summary>Segítség</summary>
         <div class="help-body">
